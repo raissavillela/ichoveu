@@ -1,4 +1,4 @@
-import { searchCities } from './weatherAPI';
+import { searchCities, getWeatherByCity, getWeatherOfTheWeek } from './weatherAPI';
 
 /**
  * Cria um elemento HTML com as informações passadas
@@ -104,18 +104,40 @@ export function createCityElement(cityInfo) {
   cityElement.appendChild(headingElement);
   cityElement.appendChild(infoContainer);
 
-  return cityElement;
+  const forecastButton = createElement('button', 'tempButton', 'Ver previsão');
+  cityElement.appendChild(forecastButton);
+
+  const ulElementList = document.getElementById('cities');
+  ulElementList.appendChild(cityElement);
+
+  const buttonSearchFunction = document.querySelector('.tempButton');
+  buttonSearchFunction.addEventListener('click', () => {
+    getWeatherOfTheWeek(cityInfo.url).then((weekWeather) => {
+      showForecast(weekWeather);
+    });
+  });
+  return ulElementList;
 }
 
 /**
  * Lida com o evento de submit do formulário de busca
  */
-export function handleSearch(event) {
+export async function handleSearch(event) {
   event.preventDefault();
   clearChildrenById('cities');
 
   const searchInput = document.getElementById('search-input');
   const searchValue = searchInput.value;
-  searchCities(searchValue);
-  // seu código aqui
+
+  try {
+    const foundCities = await searchCities(searchValue);
+
+    const cityPromises = foundCities.map((foundCity) => getWeatherByCity(foundCity.url));
+
+    const citiesWeather = await Promise.all(cityPromises);
+
+    citiesWeather.forEach((cityWeather) => createCityElement(cityWeather));
+  } catch (error) {
+    console.error(error);
+  }
 }
