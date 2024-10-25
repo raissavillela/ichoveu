@@ -32,9 +32,9 @@ Caso queira explorar a API, você poderá acessar a [documentação](https://www
 
 
 # Requisitos
-  * Implementar a função `searchCities`
+  * Implementar a função searchCities
   
-  * Implementar a função `getWeatherByCity`
+  * Implementar a função getWeatherByCity
   
   * Liste as cidades retornadas pela API
   
