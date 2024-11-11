@@ -1,6 +1,12 @@
 # Projeto iChoveu
 
-Foi desenvolvido um site de previsão do tempo que consume dados diretamente de uma API. 
+A aplicação desenvolvida é composta por duas partes: a interface do usuário (front-end) e o processamento das requisições à API (back-end).
+
+O código em JavaScript é responsável por interagir com a API de clima (WeatherAPI) para exibir informações meteorológicas de diferentes cidades em uma página web. Ele inclui funções que manipulam elementos HTML e realizam requisições para obter os dados sobre o tempo, apresentando a previsão do clima para a cidade escolhida.
+
+O CSS é utilizado para estilizar a aplicação, definindo o visual da página e seus componentes.
+
+Essa estrutura proporciona uma experiência interativa, permitindo que o usuário busque por cidades e visualize as condições climáticas de forma simples e intuitiva. 
 
 
 ## Acessando a API
